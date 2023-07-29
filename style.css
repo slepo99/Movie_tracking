@@ -1,0 +1,25 @@
+
+
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  background:  url('./src/assets/images/mstiteli-voyna-beskonechnosti-3840x2160-mstiteli-voyna-beskonechnosti-17945.jpg') ;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size:cover;
+  background-position: center;
+  font-family: -apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  min-height: 100vh;
+
+
+}
+
+
+#app {
+  
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
