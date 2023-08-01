@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-    import { usePagination } from "../store/Pagination.ts"
+    import { usePagination } from "../store/Pagination"
     const pagination = usePagination();
 </script>
 

@@ -1,24 +1,30 @@
-
-
+html {
+  height: 100%;
+}
 
 body {
   margin: 0;
   display: flex;
   place-items: center;
-  background:  url('./src/assets/images/mstiteli-voyna-beskonechnosti-3840x2160-mstiteli-voyna-beskonechnosti-17945.jpg') ;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size:cover;
-  background-position: center;
-  font-family: -apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  min-width: 320px;
   min-height: 100vh;
-
-
+  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  position: relative;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("./src/assets/images/mstiteli-voyna-beskonechnosti-3840x2160-mstiteli-voyna-beskonechnosti-17945.jpg")
+    no-repeat center center / cover;
+  z-index: -1;
+}
 
 #app {
-  
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
