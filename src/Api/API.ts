@@ -2,3 +2,4 @@
  export const movieApiUrl:string = "https://api.themoviedb.org/3/movie/popular"
  export const genreApiUrl: string = 'https://api.themoviedb.org/3/genre/movie/list'
  export const creditsApiUrl = (id:number) => `https://api.themoviedb.org/3/movie/${id}/credits`
+ export const trailerApiUrl = (id:number) => `https://api.themoviedb.org/3/movie/${id}/videos`

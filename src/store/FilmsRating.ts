@@ -5,6 +5,7 @@ import {
   movieApiUrl,
   genreApiUrl,
   creditsApiUrl,
+  trailerApiUrl,
 } from "../Api/API";
 import { FilmData } from "@/types/Films.ts";
 import { Genres } from "@/types/Genres.ts";
@@ -15,7 +16,6 @@ export const useFilmsRating = defineStore("filmsRating", {
     genres: [] as Genres[],
     credits: [] as Credits[],
   }),
-
   actions: {
     async getRating() {
       const totalPages: number = 2;
@@ -97,12 +97,48 @@ export const useFilmsRating = defineStore("filmsRating", {
           }))
         );
       } catch (error) {
-        console.error("Ошибка при выполнении запросов:", error);
+        console.error("error", error);
       }
     },
 
     async addCreditsToData() {
       await this.getCredits();
+      this.data.map((movie) => {
+        const casts = this.credits
+          .filter((item) => movie.id === item.id)
+          .map((item) => item);
+        movie.credits = casts;
+      });
+    },
+    async getTrailer() {
+      await this.addCreditsToData();
+      const ids = this.data.map((item) => item.id);
+      for (let i = 0; i < ids.length; i++) {
+        const response = await axios.get(trailerApiUrl(ids[i]), {
+          headers: {
+            accept: "application/json",
+            Authorization: movieApiKey,
+          },
+        });
+        const res = response.data;
+
+        this.data.map((item) => {
+          if (item.id == res.id) {
+            const trailer = res.results.filter((i: any) => {
+              return i.type === "Trailer" && i.name === "Official Trailer";
+            });
+            if (trailer.length === 0) {
+              const fallbackTrailer = res.results.find(
+                (i: any) => i.type === "Trailer"
+              );
+              if (fallbackTrailer) {
+                trailer.push(fallbackTrailer);
+              }
+            }
+            item.trailer = trailer;
+          }
+        });
+      }
     },
   },
 });

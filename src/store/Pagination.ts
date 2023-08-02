@@ -16,7 +16,7 @@ export const usePagination = defineStore("pagination", {
   actions: {
     async paginateData(): Promise<FilmData[]> {
       if (this.data.length === 0) {
-        await useFilmsRating().addCreditsToData();
+        await useFilmsRating().getTrailer();
       }
       const start = (this.currentPage - 1) * this.itemsPerPage;
       const end = start + this.itemsPerPage;

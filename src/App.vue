@@ -1,16 +1,12 @@
 <template>
-  <div class="app">
-    <Filters/>
-    <div>
-      <RatingList />
-    </div>
-   
+  <div>
+    <router-view>
+
+    </router-view>
   </div>
 </template>
 
 <script lang="ts" setup>
-import RatingList from "./components/RatingList.vue";
-import Filters from "./components/Filters.vue";
 </script>
 
 <style scoped>
@@ -19,6 +15,7 @@ import Filters from "./components/Filters.vue";
   padding: 0;
   display: flex;
   width: 100%;
+  
 
 }
 </style>
