@@ -4,7 +4,7 @@ import { FilmData } from "@/types/Films.ts";
 export const usePagination = defineStore("pagination", {
   state: () => ({
     data: [] as FilmData[],
-    itemsPerPage: 7 as number,
+    itemsPerPage: 5 as number,
     currentPage: 1 as number,
   }),
   getters: {
@@ -16,21 +16,21 @@ export const usePagination = defineStore("pagination", {
   actions: {
     async paginateData(): Promise<FilmData[]> {
       if (this.data.length === 0) {
-        await useFilmsRating().getRating();
+        await useFilmsRating().addCreditsToData();
       }
       const start = (this.currentPage - 1) * this.itemsPerPage;
       const end = start + this.itemsPerPage;
 
-      return this.data = useFilmsRating().data.slice(start, end);
+      return (this.data = useFilmsRating().data.slice(start, end));
     },
     async Next() {
       if (this.currentPage < this.totalPages) {
         this.currentPage++;
         await this.paginateData();
         window.scrollTo({
-            top: 0,
-            behavior: "smooth", 
-          });
+          top: 0,
+          behavior: "smooth",
+        });
       }
     },
     async Prev() {
@@ -38,9 +38,9 @@ export const usePagination = defineStore("pagination", {
         this.currentPage--;
         await this.paginateData();
         window.scrollTo({
-            top: 0,
-            behavior: "smooth", 
-          });
+          top: 0,
+          behavior: "smooth",
+        });
       }
     },
   },

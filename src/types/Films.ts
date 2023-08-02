@@ -13,4 +13,5 @@ export interface FilmData {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  film_genres: string[]
 }
