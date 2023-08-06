@@ -1,5 +1,6 @@
 import { Credits } from '@/types/Casts.ts'
 import { Trailer } from './Trailer';
+import { Genres } from './Genres';
 export interface FilmData  {
   adult: boolean;
   backdrop_path: string;
@@ -16,6 +17,7 @@ export interface FilmData  {
   vote_average: number;
   vote_count: number;
   film_genres: string[],
-  credits: Credits[],
-  trailer: Trailer[]
+  credits: Credits,
+  trailer: Trailer[],
+  genres: Genres
 }

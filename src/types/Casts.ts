@@ -1,5 +1,5 @@
 export interface Credits {
-  id: number;
+  id: number,
   cast: [
     {
       adult: boolean;
@@ -15,7 +15,7 @@ export interface Credits {
       popularity: number;
       profile_path: string;
     }
-  ];
+  ],
   crew: [
     {
       adult: boolean;

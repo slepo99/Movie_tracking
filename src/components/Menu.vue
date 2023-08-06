@@ -12,12 +12,18 @@
       <button class="friends btn"><span class="text">Friends</span></button>
     </div>
     <hr>
+    <div>
+      <Genres/>
+    </div>
+   
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import  Genres  from '@/components/Genres.vue';
+</script>
 <style scoped lang="scss">
 .container_menu {
-  height: 100vh;
+  
   width: 320px;
   left: 0;
   top: 0;

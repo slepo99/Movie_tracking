@@ -11,7 +11,7 @@ import Menu from '@/components/Menu.vue'
 import FilmList from '../FilmList.vue'
 const data = usePagination();
 onMounted(() => {
-  data.paginateData();
+ // data.paginateData();
 });
 </script>
 <style lang="scss">
