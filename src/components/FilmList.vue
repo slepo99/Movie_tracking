@@ -2,10 +2,12 @@
   <div class="container">
     <div class="item" v-for="(item, id) in data.data" :key="id">
       <div class="poster">
-        <img
-          :src="`https://image.tmdb.org/t/p/w200/` + item.poster_path"
-          alt=""
-        />
+        <router-link :to="{ name: 'film', params: { id: item.id } }">
+          <img
+            :src="`https://image.tmdb.org/t/p/w200/` + item.poster_path"
+            alt=""
+          />
+        </router-link>
       </div>
       <div class="title">
         <h6 class="name">{{ item.original_title }}</h6>
@@ -15,7 +17,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted} from "vue";
+import { onMounted } from "vue";
 import { usePagination } from "@/store/Pagination";
 const data = usePagination();
 function getDate(i: string) {
@@ -30,7 +32,7 @@ onMounted(() => {
 .container {
   display: grid;
   grid-template-columns: 15em 15em 15em 15em 15em;
-  grid-template-rows: repeat(5, 22em);
+  grid-template-rows: repeat(7, 22em);
   padding: 0 0 0 200px;
   .item {
     display: flex;
@@ -60,8 +62,11 @@ onMounted(() => {
       height: 40px;
       h6 {
         font-size: 12px;
-        margin: 5px 0 0 0;
-        color: white;
+        margin: 8px 0 0 0;
+        color: rgba(234, 234, 234, 1);
+        font-weight: 400;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
       }
     }
   }

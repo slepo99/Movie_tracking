@@ -23,7 +23,6 @@ import  Genres  from '@/components/Genres.vue';
 </script>
 <style scoped lang="scss">
 .container_menu {
-  
   width: 320px;
   left: 0;
   top: 0;
