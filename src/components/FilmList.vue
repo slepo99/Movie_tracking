@@ -2,7 +2,7 @@
   <div class="container">
     <div class="item" v-for="(item, id) in data.data" :key="id">
       <div class="poster">
-        <router-link :to="{ name: 'film', params: { id: item.id } }">
+        <router-link :to="{ name: 'details', params: { id: item.id } }">
           <img
             :src="`https://image.tmdb.org/t/p/w200/` + item.poster_path"
             alt=""
@@ -24,6 +24,7 @@ function getDate(i: string) {
   const date = new Date(i);
   return date.getFullYear();
 }
+
 onMounted(() => {
   data.paginateData();
 });

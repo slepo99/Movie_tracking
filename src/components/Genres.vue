@@ -1,5 +1,5 @@
 <template>
-  <div class="filters_container">
+  <div class="filters_container" v-if="isMainPage">
     <h2>Genres</h2>
     <div class="checkbox" v-for="item in genres.genres" :key="item.id">
       <input
@@ -14,13 +14,18 @@
 </template>
 <script lang="ts" setup>
 import { useGenres } from "@/store/Genres";
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
+import { useRoute } from "vue-router";
+const router = useRoute();
 const genres = useGenres();
 const emit = defineEmits();
 
 function selectGenre(genre: string) {
   emit("selectGenre", genre);
 }
+const isMainPage = computed(() => {
+  return router.name === "main" ? true : false;
+});
 onMounted(() => {
   genres.getGenres();
 });

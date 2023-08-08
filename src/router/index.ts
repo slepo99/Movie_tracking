@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw  } from 'vue-router'
 const Main = () => import("@/components/pages/Main.vue")
-const Film = () => import('@/components/pages/Film.vue')
+const Details = () => import('@/components/pages/Details.vue')
 const routes: Array<RouteRecordRaw> = [
 {
   path: "/",
@@ -9,8 +9,8 @@ const routes: Array<RouteRecordRaw> = [
 },
 {
   path: "/film/:id",
-  component: Film,
-  name: 'film'
+  component: Details,
+  name: 'details'
 }
 
 ]

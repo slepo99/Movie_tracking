@@ -16,7 +16,6 @@ export const useGenres = defineStore("genres", {
       };
       const response = await axios.get(genreApiUrl, params)
       this.genres = response.data.genres
-      console.log(this.genres);
     },
   },
 });
