@@ -1,30 +1,35 @@
 <template>
   <div class="container_menu">
     <div class="title">
-      <img src="../assets/icons/logo.svg" alt="" />
+      <router-link to="/">
+        <img src="../assets/icons/logo.svg" alt="" />
+      </router-link>
     </div>
     <div class="search-input">
       <input type="text" placeholder="Search" />
     </div>
     <div class="navigation">
-      <button class="home btn"><span class="text">Home</span></button>
+      <router-link to="/" class="link"
+        ><button class="home btn">
+          <span class="text">Home</span>
+        </button></router-link
+      >
       <button class="lib btn"><span class="text">Library</span></button>
       <button class="friends btn"><span class="text">Friends</span></button>
     </div>
-    <hr>
+    <hr />
     <div>
-      <Genres/>
+      <Genres />
     </div>
-   
   </div>
 </template>
 <script setup lang="ts">
-import  Genres  from '@/components/Genres.vue';
+import Genres from "@/components/Genres.vue";
 </script>
 <style scoped lang="scss">
 .container_menu {
   min-height: 100vh;
-  width: 320px;
+  width: 20vw;
   left: 0;
   top: 0;
   position: absolute;
@@ -97,6 +102,10 @@ import  Genres  from '@/components/Genres.vue';
       justify-content: center;
       align-items: center;
       border: none;
+      text-decoration: none;
+    }
+    .link {
+      text-decoration: none;
     }
     .text {
       display: inline-block;

@@ -19,5 +19,5 @@ export interface FilmData  {
   film_genres: string[],
   credits: Credits,
   trailer: Trailer[],
-  genres: Genres
+  genres: Genres[]
 }
