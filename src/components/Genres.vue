@@ -14,14 +14,15 @@
 </template>
 <script lang="ts" setup>
 import { useGenres } from "@/store/Genres";
+import { useFilters } from "@/store/Filters";
 import { onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
 const router = useRoute();
 const genres = useGenres();
-const emit = defineEmits();
+const filters = useFilters();
 
 function selectGenre(genre: string) {
-  emit("selectGenre", genre);
+  filters.setSelectedGenre(genre)
 }
 const isMainPage = computed(() => {
   return router.name === "main" ? true : false;

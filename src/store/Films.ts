@@ -41,15 +41,21 @@ export const useFilms = defineStore("films", {
       const detailResponses = await Promise.all(
         filmIds.map((filmId) => axios.get(detailedApiUrl(filmId), params))
       );
+
       const updatedData = detailResponses.map((response) => response.data);
+
       updatedData.forEach((item) => {
         if (item.credits) {
           item.credits.cast.splice(3);
           item.credits.crew.splice(3);
         }
       });
+      updatedData.map((item) => {
+        const genres = item.genres.map((i: { name: string }) => i.name);
+        item.genres_list = genres;
+      });
+
       this.data = updatedData;
-    }
-    
+    },
   },
 });

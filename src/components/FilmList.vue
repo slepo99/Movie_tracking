@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="item" v-for="(item, id) in data.data" :key="id">
+    <div class="item" v-for="(item, id) in filteredFilms" :key="id">
       <div class="poster">
         <router-link :to="{ name: 'details', params: { id: item.id } }">
           <img
@@ -10,23 +10,34 @@
         </router-link>
       </div>
       <div class="title">
-        <h6 class="name">{{ item.original_title}}</h6>
+        <h6 class="name">{{ item.original_title }}</h6>
         <h6 class="year">({{ getDate(item.release_date) }})</h6>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
 import { usePagination } from "@/store/Pagination";
-const data = usePagination();
+import { useFilters } from "@/store/Filters";
+
+const films = usePagination();
+const filters = useFilters();
+
 function getDate(i: string) {
   const date = new Date(i);
   return date.getFullYear();
 }
+const filteredFilms = computed(() => {
+  if (filters.selectedGenre === 'All') {
+    return films.data;
+  } else {
+    return films.data.filter(item => item.genres_list.includes(filters.selectedGenre));
+  }
+});
 
 onMounted(() => {
-  data.paginateData();
+  films.paginateData();
 });
 </script>
 <style lang="scss" scoped>
@@ -35,7 +46,7 @@ onMounted(() => {
   grid-template-columns: 15em 15em 15em 15em 15em;
   grid-template-rows: repeat(7, 22em);
   padding: 0 0 0 200px;
-  
+
   .item {
     display: flex;
     flex-direction: column;

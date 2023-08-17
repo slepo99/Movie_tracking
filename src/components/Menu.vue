@@ -23,7 +23,7 @@
         <Genres />
       </div>
     </div>
-    <div class="dropdown" @click="toggleMenu">
+    <div class="dropdown" @click="toggleMenu" v-if="isMain">
       <span class="material-symbols-outlined"> menu </span>
     </div>
   </div>
@@ -31,30 +31,35 @@
 <script setup lang="ts">
 import Genres from "@/components/Genres.vue";
 import { useRoute } from "vue-router";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
+
 const router = useRoute();
 const emit = defineEmits();
 const isOpen = ref(false);
+
+const isMain = computed(() => {
+  return router.name !== "main";
+});
 function toggleMenu() {
-  if (router.name !== "main") {
-    isOpen.value = !isOpen.value;
-  }
+  isOpen.value = !isOpen.value;
   emit("toggleMenu", isOpen.value);
 }
 function setMenuState() {
   if (router.name !== "main") {
-    isOpen.value = false;
+    isOpen.value = true;
   } else {
     isOpen.value = false;
   }
 }
 onMounted(() => {
   setMenuState();
+  emit("toggleMenu", isOpen.value);
 });
 </script>
 <style scoped lang="scss">
 .container_menu {
   min-height: 100vh;
+  transition: width 0.3s ease;
   width: 20%;
   left: 0;
   top: 0;
@@ -86,7 +91,7 @@ onMounted(() => {
     }
   }
   .dropdown:hover {
-    background-color: #fff;
+    background-color: rgb(255, 255, 255);
     .material-symbols-outlined {
       font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 300, "opsz" 48;
       font-weight: 700;
@@ -95,20 +100,24 @@ onMounted(() => {
   }
   .title {
     width: 150px;
+    transition: width 0.3s ease;
     height: 30px;
     margin: 5vh 0 0 3vw;
     img {
       width: 150px;
       height: 30px;
+      transition: width 0.3s ease;
     }
   }
   .search-input {
     width: 260px;
+    transition: width 0.3s ease;
     height: 44px;
     margin: 3vh 0 0 1vw;
 
     input {
       border-radius: 8px;
+      transition: width 0.3s ease;
       width: 230px;
       height: 34px;
       text-decoration: none;
@@ -122,6 +131,7 @@ onMounted(() => {
     }
     input::placeholder {
       text-indent: -50px;
+      transition: width 0.3s ease;
       color: rgba(255, 255, 255, 0.5);
       font-size: 16px;
     }
@@ -140,6 +150,7 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     width: 260px;
+    transition: width 0.3s ease;
     margin: 3vh 0 0 1vw;
     align-items: center;
     gap: 20px;
@@ -148,6 +159,7 @@ onMounted(() => {
       border-radius: 8px;
       width: 240px;
       height: 44px;
+      transition: width 0.3s ease;
       text-decoration: none;
       background-color: rgba(8, 8, 8, 1);
       border: 3px solid rgb(13, 13, 13);
@@ -200,6 +212,7 @@ onMounted(() => {
   }
   .vertical {
     width: 260px;
+    transition: width 0.3s ease;
     margin-top: 20px;
     background-color: rgb(31, 31, 31);
     height: 2px;
@@ -216,6 +229,8 @@ onMounted(() => {
   position: absolute;
   background-color: rgba(8, 8, 8, 1);
   overflow: hidden;
+  z-index: 101;
+  position: absolute;
   .title {
     width: 0px;
     transition: width 0.3s ease;
@@ -230,17 +245,16 @@ onMounted(() => {
   .search-input {
     width: 0px;
     height: 0px;
-
+    z-index: -1;
     transition: width 0.2s ease;
 
     input {
       background: none;
       transition: width 0.2s ease;
-      width: 0;
+      width: 0px;
       height: 34px;
       text-decoration: none;
-
-      background-repeat: no-repeat;
+      border: none;
     }
     input::placeholder {
       font-size: 16px;

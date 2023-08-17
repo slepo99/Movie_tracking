@@ -54,6 +54,12 @@ interface Props {
 const props = defineProps<Props>();
 const pagination = usePagination();
 const films = useFilms();
+
+const getFilmInfo = computed(() => {
+  const data = films.data.filter((item) => item.id === parseInt(props.routeId));
+  return data;
+});
+
 function voteAverage(item: number) {
   return `${item.toFixed(1)} / 10`;
 }
@@ -66,10 +72,6 @@ function getDate(i: string) {
     return item.toLocaleString("en-US", { style: "currency", currency: "USD" });
   }
 }
-const getFilmInfo = computed(() => {
-  const data = films.data.filter((item) => item.id === parseInt(props.routeId));
-  return data;
-});
 
 onMounted(() => {
   pagination.paginateData();
@@ -82,6 +84,7 @@ onMounted(() => {
   width: 80%;
   height: 100%;
   position: absolute;
+  transition: width 0.3s ease;
   top: 0;
   right: 0;
   z-index: 1;
@@ -150,5 +153,6 @@ onMounted(() => {
 }
 .open {
     width: 90%;
+    transition: width 0.3s ease;
   }
 </style>
