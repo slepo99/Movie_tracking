@@ -10,7 +10,7 @@
         </router-link>
       </div>
       <div class="title">
-        <h6 class="name">{{ item.original_title }}</h6>
+        <h6 class="name">{{ item.original_title}}</h6>
         <h6 class="year">({{ getDate(item.release_date) }})</h6>
       </div>
     </div>
@@ -35,6 +35,7 @@ onMounted(() => {
   grid-template-columns: 15em 15em 15em 15em 15em;
   grid-template-rows: repeat(7, 22em);
   padding: 0 0 0 200px;
+  
   .item {
     display: flex;
     flex-direction: column;

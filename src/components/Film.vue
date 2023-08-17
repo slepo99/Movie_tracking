@@ -1,6 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container" :class="{open: props.isOpen}">
     <div v-for="item in getFilmInfo">
+      <h1 class="title">{{ item.original_title }}</h1>
       <div class="container_movie">
         <div class="image-box">
           <img
@@ -15,11 +16,27 @@
               <p>{{ genre.name }}</p>
             </div>
           </div>
+          <div class="rating">
+            <p>
+              IMDB Rating:{{ voteAverage(item.vote_average)
+              }}<span class="material-symbols-outlined"> star </span>
+            </p>
+          </div>
+          <div class="year">
+            <p>Year: {{ getDate(item.release_date) }}</p>
+          </div>
+          <div
+            class="country"
+            v-for="(county, id) in item.production_countries"
+            :key="id"
+          >
+            <p>Country: {{ county.name }}</p>
+          </div>
+          <div>
+            <p>Budget: {{ getBudget(item.budget) }}</p>
+          </div>
           <div class="overview">
             <p>{{ item.overview }}</p>
-          </div>
-          <div class="rating">
-            <p>IMDB Rating {{ voteAverage(item.vote_average) }}</p>
           </div>
         </div>
       </div>
@@ -32,12 +49,22 @@ import { usePagination } from "@/store/Pagination";
 import { computed, onMounted } from "vue";
 interface Props {
   routeId: string;
+  isOpen: boolean
 }
 const props = defineProps<Props>();
 const pagination = usePagination();
 const films = useFilms();
 function voteAverage(item: number) {
   return `${item.toFixed(1)} / 10`;
+}
+function getDate(i: string) {
+  const date = new Date(i);
+  return date.getFullYear();
+}
+ function getBudget(item: number) {
+  if (item !== undefined && item !== null) {
+    return item.toLocaleString("en-US", { style: "currency", currency: "USD" });
+  }
 }
 const getFilmInfo = computed(() => {
   const data = films.data.filter((item) => item.id === parseInt(props.routeId));
@@ -46,16 +73,25 @@ const getFilmInfo = computed(() => {
 
 onMounted(() => {
   pagination.paginateData();
+  console.log(props.isOpen);
+  
 });
 </script>
 <style lang="scss" scoped>
 .container {
-  width: 80vw;
+  width: 80%;
   height: 100%;
   position: absolute;
   top: 0;
   right: 0;
-
+  z-index: 1;
+  
+  .title {
+    color: white;
+    margin: 0;
+    padding: 50px 0 0 50px;
+    text-align: start;
+  }
   &_movie {
     display: flex;
     padding: 50px 0 0 50px;
@@ -65,21 +101,23 @@ onMounted(() => {
       width: 210px;
 
       img {
-        height: 300px;
-        width: 200px;
+        height: 350px;
+        width: 230px;
         border-radius: 12px;
       }
     }
     .info-box {
-      width: 700px;
+      width: 600px;
+      height: 350px;
       display: flex;
       flex-direction: column;
       color: white;
+      justify-content: space-between;
       .genres {
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: space-between;
         gap: 5px;
         div {
           width: 100px;
@@ -96,7 +134,21 @@ onMounted(() => {
           }
         }
       }
+      .rating {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        p {
+          margin: 0;
+          display: flex;
+          align-items: center;
+          text-align: center;
+        }
+      }
     }
   }
 }
+.open {
+    width: 90%;
+  }
 </style>

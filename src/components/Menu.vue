@@ -1,39 +1,98 @@
 <template>
-  <div class="container_menu">
-    <div class="title">
-      <router-link to="/">
-        <img src="../assets/icons/logo.svg" alt="" />
-      </router-link>
+  <div class="container_menu" :class="{ some: isOpen }">
+    <div class="main-content">
+      <div class="title">
+        <router-link to="/">
+          <img src="../assets/icons/logo.svg" alt="" />
+        </router-link>
+      </div>
+      <div class="search-input">
+        <input type="text" placeholder="Search" />
+      </div>
+      <div class="navigation">
+        <router-link to="/" class="link"
+          ><button class="home btn">
+            <span class="text">Home</span>
+          </button></router-link
+        >
+        <button class="lib btn"><span class="text">Library</span></button>
+        <button class="friends btn"><span class="text">Friends</span></button>
+      </div>
+      <hr class="vertical" />
+      <div>
+        <Genres />
+      </div>
     </div>
-    <div class="search-input">
-      <input type="text" placeholder="Search" />
-    </div>
-    <div class="navigation">
-      <router-link to="/" class="link"
-        ><button class="home btn">
-          <span class="text">Home</span>
-        </button></router-link
-      >
-      <button class="lib btn"><span class="text">Library</span></button>
-      <button class="friends btn"><span class="text">Friends</span></button>
-    </div>
-    <hr />
-    <div>
-      <Genres />
+    <div class="dropdown" @click="toggleMenu">
+      <span class="material-symbols-outlined"> menu </span>
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import Genres from "@/components/Genres.vue";
+import { useRoute } from "vue-router";
+import { ref, onMounted } from "vue";
+const router = useRoute();
+const emit = defineEmits();
+const isOpen = ref(false);
+function toggleMenu() {
+  if (router.name !== "main") {
+    isOpen.value = !isOpen.value;
+  }
+  emit("toggleMenu", isOpen.value);
+}
+function setMenuState() {
+  if (router.name !== "main") {
+    isOpen.value = false;
+  } else {
+    isOpen.value = false;
+  }
+}
+onMounted(() => {
+  setMenuState();
+});
 </script>
 <style scoped lang="scss">
 .container_menu {
   min-height: 100vh;
-  width: 20vw;
+  width: 20%;
   left: 0;
   top: 0;
   position: absolute;
   background-color: rgba(8, 8, 8, 1);
+  display: flex;
+  z-index: 2;
+  .dropdown {
+    top: 0;
+    position: inherit;
+    right: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 2px;
+
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 300, "opsz" 48;
+      color: white;
+      font-weight: 700;
+      transform: rotate(90deg) scaleY(-1) scaleX(5);
+      cursor: pointer;
+    }
+    .material-symbols-outlined:hover {
+      color: black;
+    }
+  }
+  .dropdown:hover {
+    background-color: #fff;
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 300, "opsz" 48;
+      font-weight: 700;
+      color: black;
+    }
+  }
   .title {
     width: 150px;
     height: 30px;
@@ -139,12 +198,131 @@ import Genres from "@/components/Genres.vue";
       text-align: center;
     }
   }
-  hr {
+  .vertical {
     width: 260px;
     margin-top: 20px;
     background-color: rgb(31, 31, 31);
     height: 2px;
     border: none;
+  }
+}
+
+.container_menu.some {
+  min-height: 100vh;
+  transition: width 0.3s ease;
+  width: 24px;
+  left: 0;
+  top: 0;
+  position: absolute;
+  background-color: rgba(8, 8, 8, 1);
+  overflow: hidden;
+  .title {
+    width: 0px;
+    transition: width 0.3s ease;
+    height: 30px;
+    margin: 5vh 0 0 3vw;
+    img {
+      width: 0px;
+      height: 30px;
+      transition: width 0.3s ease;
+    }
+  }
+  .search-input {
+    width: 0px;
+    height: 0px;
+
+    transition: width 0.2s ease;
+
+    input {
+      background: none;
+      transition: width 0.2s ease;
+      width: 0;
+      height: 34px;
+      text-decoration: none;
+
+      background-repeat: no-repeat;
+    }
+    input::placeholder {
+      font-size: 16px;
+      transition: width 0.3s ease;
+    }
+    input,
+    select,
+    textarea {
+      transition: width 0.3s ease;
+      color: white;
+      font-size: 16px;
+      transition: width 0.3s ease;
+    }
+    input:focus {
+      outline: none;
+      border: 2px solid #fff;
+      transition: width 0.3s ease;
+    }
+  }
+  .navigation {
+    display: flex;
+    flex-direction: column;
+    width: 0px;
+    margin: 3vh 0 0 1vw;
+    align-items: center;
+    transition: width 0.3s ease;
+    gap: 20px;
+
+    .btn {
+      transition: width 0.3s ease;
+      font-size: 0;
+    }
+    .link {
+      transition: width 0.3s ease;
+      text-decoration: none;
+    }
+    .text {
+      transition: width 0.3s ease;
+      display: inline-block;
+    }
+    .btn:hover {
+      transition: width 0.3s ease;
+      background: rgb(31, 31, 31);
+    }
+    .btn:hover .text {
+      transition: width 0.3s ease;
+      transform: translateX(-50px);
+    }
+
+    .home {
+      transition: width 0.3s ease;
+      background: url("../assets/icons/home.svg");
+      background-repeat: no-repeat;
+      background-position: left center;
+      background-position-x: 0px;
+      text-align: center;
+    }
+    .lib {
+      transition: width 0.3s ease;
+      background: url("../assets/icons/library.svg");
+      background-repeat: no-repeat;
+      background-position: left center;
+      background-position-x: 0px;
+      text-align: center;
+    }
+    .friends {
+      transition: width 0.3s ease;
+      background: url("../assets/icons/friends.svg");
+      background-repeat: no-repeat;
+      background-position: left center;
+      background-position-x: 0px;
+      text-align: center;
+    }
+  }
+  hr {
+    transition: width 0.3s ease;
+    width: 0px;
+    margin-top: 20px;
+    background-color: rgb(31, 31, 31);
+    height: 2px;
+    border: none;
+    transition: width 0.2s ease;
   }
 }
 </style>

@@ -19,5 +19,10 @@ export interface FilmData  {
   film_genres: string[],
   credits: Credits,
   trailer: Trailer[],
-  genres: Genres[]
+  genres: Genres[],
+  production_countries: [{
+    name: string,
+    iso_3166_1: string
+  }],
+  budget: number
 }
