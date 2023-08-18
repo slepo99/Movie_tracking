@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="item" v-for="(item, id) in filteredFilms" :key="id">
+    <div class="item" v-for="(item, id) in searchFilm" :key="id">
       <div class="poster">
         <router-link :to="{ name: 'details', params: { id: item.id } }">
           <img
@@ -35,9 +35,17 @@ const filteredFilms = computed(() => {
     return films.data.filter(item => item.genres_list.includes(filters.selectedGenre));
   }
 });
-
+const searchFilm = computed(() => {
+  if(filters.inputValue == '') {
+    return filteredFilms.value
+  } else {
+   return filteredFilms.value.filter((item) => item.original_title.toLocaleLowerCase().includes(filters.inputValue.toLocaleLowerCase()))
+  }
+})
 onMounted(() => {
   films.paginateData();
+  console.log(searchFilm.value);
+  
 });
 </script>
 <style lang="scss" scoped>
