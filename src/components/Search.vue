@@ -13,10 +13,11 @@ const filter = useFilters()
   transition: width 0.3s ease;
   height: 44px;
   margin: 3vh 0 0 1vw;
+  text-align: center;
 
   input {
     border-radius: 8px;
-    transition: width 0.2s ease;
+    transition: width 0.3s ease;
     width: 230px;
     height: 34px;
     text-decoration: none;
@@ -50,11 +51,11 @@ const filter = useFilters()
     width: 0px;
     height: 0px;
     z-index: -1;
-    transition: width 0.2s ease;
+    transition: width 0.3s ease;
 
     input {
       background: none;
-      transition: width 0.2s ease;
+      transition: width 0.3s ease;
       width: 0px;
       height: 34px;
       text-decoration: none;

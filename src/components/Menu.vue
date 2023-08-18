@@ -174,7 +174,7 @@ onMounted(() => {
     }
   }
   .vertical {
-    width: 260px;
+    width: 90%;
     transition: width 0.3s ease;
     margin-top: 20px;
     background-color: rgb(31, 31, 31);
@@ -261,9 +261,9 @@ onMounted(() => {
       text-align: center;
     }
   }
-  hr {
+  .vertical {
     transition: width 0.3s ease;
-    width: 0px;
+    width: 0%;
     margin-top: 20px;
     background-color: rgb(31, 31, 31);
     height: 2px;

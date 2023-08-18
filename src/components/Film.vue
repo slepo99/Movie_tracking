@@ -4,7 +4,7 @@
       <div
         class="background-image"
         :style="{
-          background: `url(\'https://image.tmdb.org/t/p/original${item.backdrop_path}\')`,
+          background: `url(\'https://image.tmdb.org/t/p/w1280/${item.backdrop_path}\')`,
           'background-position': 'center',
           'background-repeat': 'no-repeat',
           'background-size': 'cover',
@@ -86,7 +86,6 @@ function getBudget(item: number) {
 
 onMounted(() => {
   pagination.paginateData();
-  console.log(props.isOpen);
 });
 </script>
 <style lang="scss" scoped>
@@ -98,6 +97,11 @@ onMounted(() => {
   top: 0;
   right: 0;
   z-index: 1;
+  p {
+    color: black;
+    font-size: 18px;
+    font-weight: 700;
+  }
   .background-image {
     position: absolute;
     width: 100%;
@@ -113,25 +117,28 @@ onMounted(() => {
   .title {
     color: white;
     margin: 0;
-
-    text-align: start;
+    padding: 50px 0 0 0;
+    text-align: center;
   }
   &_movie {
     display: flex;
-    padding: 50px 0 0 50px;
+    margin: 50px 0 0 100px;
+    justify-content:flex-start;
     position: relative;
     gap: 50px;
     height: 500px;
 
     .image-box {
-      height: 320px;
-      width: 210px;
+      height: 500px;
+      width: 350px;
       z-index: 101;
 
       img {
-        height: 350px;
-        width: 230px;
+        height: 500px;
+        width: 350px;
         border-radius: 12px;
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2),
+          0 9px 20px 0 rgba(0, 0, 0, 0.19);
       }
     }
     .info-box {
@@ -141,12 +148,12 @@ onMounted(() => {
       flex-direction: column;
       color: white;
       justify-content: space-between;
+      height: 100%;
 
       .genres {
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
         gap: 5px;
 
         div {
@@ -154,13 +161,16 @@ onMounted(() => {
           max-width: 200px;
           height: 50px;
           border-radius: 40px;
-          border: 1px solid white;
+          border: 1px solid rgb(0, 0, 0);
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
           align-items: center;
+          text-align: center;
+          background-color: rgb(0, 0, 0);
           p {
             margin: 0;
+            color: white;
           }
         }
       }
