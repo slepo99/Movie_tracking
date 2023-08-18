@@ -1,4 +1,6 @@
-
+* {
+  box-sizing: border-box;
+}
 
 
 html {
@@ -8,11 +10,9 @@ html {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  
   font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-  position: relative;
+
   background-color: rgb(13,13,13);
   
 }

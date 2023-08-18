@@ -44,7 +44,6 @@ const searchFilm = computed(() => {
 })
 onMounted(() => {
   films.paginateData();
-  console.log(searchFilm.value);
   
 });
 </script>
@@ -54,7 +53,7 @@ onMounted(() => {
   grid-template-columns: 15em 15em 15em 15em 15em;
   grid-template-rows: repeat(7, 22em);
   padding: 0 0 0 200px;
-
+  align-items: stretch;
   .item {
     display: flex;
     flex-direction: column;

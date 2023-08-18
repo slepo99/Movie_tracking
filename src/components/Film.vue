@@ -1,7 +1,17 @@
 <template>
-  <div class="container" :class="{open: props.isOpen}">
+  <div class="container" :class="{ open: props.isOpen }">
     <div v-for="item in getFilmInfo">
+      <div
+        class="background-image"
+        :style="{
+          background: `url(\'https://image.tmdb.org/t/p/original${item.backdrop_path}\')`,
+          'background-position': 'center',
+          'background-repeat': 'no-repeat',
+          'background-size': 'cover',
+        }"
+      ></div>
       <h1 class="title">{{ item.original_title }}</h1>
+
       <div class="container_movie">
         <div class="image-box">
           <img
@@ -49,8 +59,9 @@ import { usePagination } from "@/store/Pagination";
 import { computed, onMounted } from "vue";
 interface Props {
   routeId: string;
-  isOpen: boolean
+  isOpen: boolean;
 }
+
 const props = defineProps<Props>();
 const pagination = usePagination();
 const films = useFilms();
@@ -67,7 +78,7 @@ function getDate(i: string) {
   const date = new Date(i);
   return date.getFullYear();
 }
- function getBudget(item: number) {
+function getBudget(item: number) {
   if (item !== undefined && item !== null) {
     return item.toLocaleString("en-US", { style: "currency", currency: "USD" });
   }
@@ -76,7 +87,6 @@ function getDate(i: string) {
 onMounted(() => {
   pagination.paginateData();
   console.log(props.isOpen);
-  
 });
 </script>
 <style lang="scss" scoped>
@@ -88,20 +98,35 @@ onMounted(() => {
   top: 0;
   right: 0;
   z-index: 1;
-  
+  .background-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    filter: blur(10px);
+    z-index: -1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
   .title {
     color: white;
     margin: 0;
-    padding: 50px 0 0 50px;
+
     text-align: start;
   }
   &_movie {
     display: flex;
     padding: 50px 0 0 50px;
+    position: relative;
     gap: 50px;
+    height: 500px;
+
     .image-box {
       height: 320px;
       width: 210px;
+      z-index: 101;
 
       img {
         height: 350px;
@@ -116,12 +141,14 @@ onMounted(() => {
       flex-direction: column;
       color: white;
       justify-content: space-between;
+
       .genres {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 5px;
+
         div {
           width: 100px;
           max-width: 200px;
@@ -152,7 +179,7 @@ onMounted(() => {
   }
 }
 .open {
-    width: 90%;
-    transition: width 0.3s ease;
-  }
+  width: 100%;
+  transition: width 0.3s ease;
+}
 </style>
