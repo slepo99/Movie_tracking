@@ -49,6 +49,9 @@ export const useFilms = defineStore("films", {
           item.credits.cast.splice(3);
           item.credits.crew.splice(3);
         }
+        if (item.videos.results) {
+         (item.videos.results = item.videos.results.filter((i: { type: string; }) => i.type === 'Trailer' || i.type === 'Teaser')).splice(1)
+        }
       });
       updatedData.map((item) => {
         const genres = item.genres.map((i: { name: string }) => i.name);

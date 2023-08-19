@@ -25,5 +25,12 @@ export interface FilmData  {
     iso_3166_1: string
   }],
   budget: number,
-  genres_list: string[]
+  genres_list: string[],
+  videos:{
+    results: [
+      {
+        key: string
+      }
+    ]
+  }
 }

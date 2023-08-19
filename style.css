@@ -11,8 +11,10 @@ body {
   margin: 0;
   display: flex;
   
-  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-
+  /* font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; */
+  font-family: "Source Sans Pro",Arial,sans-serif;
+  font-size: 1em;
+  -webkit-font-smoothing: antialiased;
   background-color: rgb(13,13,13);
   
 }

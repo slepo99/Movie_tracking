@@ -1,5 +1,4 @@
 export interface Credits {
-  id: number,
   cast: [
     {
       adult: boolean;

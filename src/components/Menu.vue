@@ -62,14 +62,14 @@ onMounted(() => {
   width: 20%;
   left: 0;
   top: 0;
-  position: absolute;
+  position: fixed;
   background-color: rgba(8, 8, 8, 1);
   display: flex;
   z-index: 2;
   .dropdown {
     top: 0;
-    position: inherit;
-    right: 0;
+    position: absolute;
+   right: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -117,7 +117,9 @@ onMounted(() => {
     margin: 3vh 0 0 1vw;
     align-items: center;
     gap: 20px;
-
+    .main-content {
+      position: relative;
+    }
     .btn {
       border-radius: 8px;
       width: 240px;
@@ -189,11 +191,11 @@ onMounted(() => {
   width: 24px;
   left: 0;
   top: 0;
-  position: absolute;
+  position: fixed;
   background-color: rgba(8, 8, 8, 1);
   overflow: hidden;
   z-index: 101;
-  position: absolute;
+
   .title {
     width: 0px;
     transition: width 0.3s ease;
