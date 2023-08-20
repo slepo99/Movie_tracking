@@ -66,6 +66,7 @@ onMounted(() => {
   background-color: rgba(8, 8, 8, 1);
   display: flex;
   z-index: 2;
+  overflow-y: scroll;
   .dropdown {
     top: 0;
     position: absolute;
@@ -183,6 +184,7 @@ onMounted(() => {
     height: 2px;
     border: none;
   }
+  
 }
 
 .container_menu.some {
@@ -272,5 +274,7 @@ onMounted(() => {
     border: none;
     transition: width 0.2s ease;
   }
+
+  
 }
 </style>

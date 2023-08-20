@@ -39,11 +39,14 @@ onMounted(() => {
   width: 260px;
   margin: 0 0 0 2vw;
   gap: 3px;
+  overflow: scroll;
+  height: 600px;
   h2 {
     color: rgba(255, 255, 255, 0.5);
     font-weight: 500;
   }
   .checkbox {
+    
     input {
       color: rgba(255, 255, 255, 0.5);
       background-color: rgba(8, 8, 8, 1);

@@ -22,7 +22,11 @@
           <h6 class="year">({{ getDate(item.release_date) }})</h6>
         </div>
       </div>
+      <div class="pagination">
+      <Pagination/>
+      </div>
     </div>
+    
   </div>
 </template>
 <script setup lang="ts">
@@ -30,6 +34,8 @@ import { onMounted, computed } from "vue";
 import { usePagination } from "@/store/Pagination";
 import { useFilters } from "@/store/Filters";
 import Spinner from "@/components/UI/Spinner.vue";
+import Pagination from "./Pagination.vue";
+
 const films = usePagination();
 const filters = useFilters();
 
@@ -84,7 +90,11 @@ onMounted(() => {
   grid-template-rows: repeat(7, 22em);
   padding: 0 0 0 200px;
   align-items: stretch;
-
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .item {
     display: flex;
     flex-direction: column;
@@ -118,6 +128,33 @@ onMounted(() => {
         font-weight: 400;
         font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
           "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    padding: 0;
+    .item {
+      margin: 10px;
+      .poster {
+        img {
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+        }
+      }
+      .poster:hover img {
+        width: 100%;
+        height: auto;
+      }
+      .title {
+        width: 100%;
+        h6 {
+          font-size: 10px;
+          margin: 4px 0 0 0;
+        }
       }
     }
   }

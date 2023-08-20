@@ -10,7 +10,7 @@
           'background-size': 'cover',
         }"
       ></div>
-      <h1 class="title">{{ item.original_title }}</h1>
+      <h1 class="title">{{ item.title }}</h1>
       <div class="container_movie">
         <div class="container_movie_details">
           <div class="image-box">
@@ -66,16 +66,7 @@
         </div>
         <div v-if="item.videos && item.videos.results">
           <div v-for="(i, id) in item.videos.results" :key="id" class="trailer">
-            <iframe
-              :src="`https://www.youtube.com/embed/${i.key}`"
-              width="70%"
-              height="400"
-              frameborder="0"
-              allowfullscreen
-              modestbranding="0"
-              showinfo="0"
-             
-            ></iframe>
+            <Trailer :source="i.key"/>
           </div>
         </div>
       </div>
@@ -83,9 +74,10 @@
   </div>
 </template>
 <script setup lang="ts">
+import { computed, onMounted } from "vue";
 import { useFilms } from "@/store/Films";
 import { usePagination } from "@/store/Pagination";
-import { computed, onMounted } from "vue";
+import Trailer from "./Trailer.vue";
 
 interface Props {
   routeId: string;
