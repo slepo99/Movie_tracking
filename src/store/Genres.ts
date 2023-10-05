@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { genreApiUrl, movieApiKey } from "@/Api/API";
+import { genreApiUrl, movieApiKey } from "@/services/links/api/API";
 import { Genres } from "@/types/Genres";
 export const useGenres = defineStore("genres", {
   state: () => ({

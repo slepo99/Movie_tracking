@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { movieApiKey, movieApiUrl, detailedApiUrl } from "@/Api/API";
+import { movieApiKey, movieApiUrl, detailedApiUrl } from "@/services/links/api/API";
 import { FilmData } from "@/types/Films";
 
 export const useFilms = defineStore("films", {

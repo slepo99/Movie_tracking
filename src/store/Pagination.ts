@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-//import { useFilmsRating } from "./FilmsRating.ts";
 import { useFilms } from "./Films.ts";
 import { FilmData } from "@/types/Films.ts";
 export const usePagination = defineStore("pagination", {
